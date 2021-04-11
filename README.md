@@ -1,8 +1,8 @@
 # Welcome
 # Table of Contents
-  1.Installation
-  2.Project Overview
-  3.File Descriptions
+  1. Installation
+  2. Project Overview
+  3. File Descriptions
 
 ## Installation
 
