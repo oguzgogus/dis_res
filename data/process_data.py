@@ -2,16 +2,6 @@ import sys
 import pandas as pd
 from sqlalchemy import create_engine
 
-messages_filepath = r'C:\Users\ogzpython\Desktop\ml\response_ml\Disaster_Response_Project\data\disaster_messages.csv'
-categories_filepath = r'C:\Users\ogzpython\Desktop\ml\response_ml\Disaster_Response_Project\data\disaster_categories.csv'
-database_filename = r'dis_res'
-
-sys.argv.clear()
-sys.argv.append('process_data.py')
-sys.argv.append(messages_filepath)
-sys.argv.append(categories_filepath)
-sys.argv.append(database_filename)
-
 
 def load_data(messages_filepath, categories_filepath):
    

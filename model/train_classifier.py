@@ -22,13 +22,6 @@ from sklearn.metrics import classification_report
 from sklearn.model_selection import GridSearchCV
 
 
-database_filepath = 'C:\\Users\\ogzpython\\Desktop\\ml\\response_ml\\Disaster_Response_Project\\data\\dis_res.db'
-model_filepath = r'C:\Users\ogzpython\Desktop\ml\pkls\dis_res\model2.pkl'
-sys.argv.clear()
-sys.argv.append('train_classifier.py')
-sys.argv.append(database_filepath)
-sys.argv.append(model_filepath)
-
 
 def load_data(database_filepath):
     
