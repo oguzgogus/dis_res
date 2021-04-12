@@ -19,7 +19,7 @@
   - plotly
   - sqlite3
   - joblib
-  - 
+
 ## Project Overview
 
 In this project, I analyze disaster messages provided from Figure Eight https://appen.com/ and build a web app that classifies messages using a ML pipeline into 36 categories.
@@ -45,12 +45,12 @@ Datast is unbalanced dataset. In the web app that is build with this training da
 
 ## How to run
 
-You can run following commands in the project's directory.
+You can run following commands in the project's directory. (cd to root file path)
 
   1. To run pipeline for cleaning data and storing in database
-$ python data/process_data.py data/disaster_messages.csv data/disaster_categories.csv data/DisasterResponse.db
+$ python data/process_data.py data/disaster_messages.csv data/disaster_categories.csv data/dis_res.db
   2. To run ML pipeline that trains and saves the classifier 
-$ python models/train_classifier.py data/DisasterResponse.db models/model.pkl
+$ python model/train_classifier.py data/dis_res.db model/model.pkl
   3. To run web app cd to app directory and execute
 $ python run.py
   4. To open web app go to http://0.0.0.0:3001/
