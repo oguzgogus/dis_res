@@ -62,7 +62,7 @@ def save_data(df, database_filename):
     #input: previously created df and file name for the database
     
     
-    engine = create_engine('sqlite:///{}.db'.format(database_filename))
+    engine = create_engine('sqlite:///{}'.format(database_filename))
     df.to_sql('{}'.format(database_filename), engine, index=False, if_exists='replace')
     
     
@@ -99,6 +99,8 @@ if __name__ == '__main__':
     main()
     
     
+    
+
     
 
     
