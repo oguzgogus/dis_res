@@ -47,6 +47,8 @@
             </div>
         </div>
 
+
+
         {% block message %}
         {% endblock %}
     </div>
@@ -58,6 +60,10 @@
             <h1 class="text-center">Overview of Training Dataset</h1>
         </div>
     {% endblock %}
+    
+        <div class="graphs">
+            <div id=graph-1 ></div>
+        </div>
 
     {% for id in ids %}
         <div id="{{id}}"></div>

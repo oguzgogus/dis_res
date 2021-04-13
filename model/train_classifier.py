@@ -25,8 +25,11 @@ from sklearn.model_selection import GridSearchCV
 
 def load_data(database_filepath):
     
-    #input : database path
-    #output : X,y to use in ML
+    """ 
+   input : database path
+   output : X,y to use in ML
+   
+    """
     
     
     engine= create_engine('sqlite:///{}'.format(database_filepath))
@@ -41,8 +44,10 @@ def load_data(database_filepath):
 
 def tokenize(text):
     
-    #input:text
-    #output: cleaned and tokenized list of the text
+    """
+    input:text
+    output: cleaned and tokenized list of the text
+    """
     
     text = text.lower()
     text = re.sub(r"[^a-zA-Z0-9]", " ", text) 
@@ -57,7 +62,10 @@ def tokenize(text):
 
 def build_model():
     
-    #output: model
+    """
+    output: model
+    
+    """
     
     pipeline = Pipeline([
         ('vect', CountVectorizer(tokenizer=tokenize)),
@@ -88,7 +96,9 @@ def build_model():
 
 def evaluate_model(model, X_test, Y_test, category_names):
     
-    #output: prints classification report 
+    """
+    output: prints classification report 
+    """
     
     Y_pred = model.predict(X_test)
     report = classification_report(Y_test,Y_pred,target_names = category_names)

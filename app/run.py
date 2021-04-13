@@ -8,8 +8,10 @@ from nltk.tokenize import word_tokenize
 from flask import Flask
 from flask import render_template, request, jsonify
 from plotly.graph_objs import Bar
+import plotly.express as px
 from sklearn.externals import joblib
 from sqlalchemy import create_engine
+
 
 
 app = Flask(__name__)
@@ -30,7 +32,8 @@ engine = create_engine('sqlite:///C:\\Users\\ogzpython\\Desktop\\ml\\response_ml
 df = pd.read_sql_table('dis_res', engine)
 
 # load model
-model = joblib.load( r'C:\Users\ogzpython\Desktop\ml\pkls\dis_res\model.pkl')
+#model = joblib.load("../models/your_model_name.pkl")
+model = joblib.load(r"C:\Users\ogzpython\Desktop\ml\pkls\dis_res\model.pkl")
 
 
 # index webpage displays cool visuals and receives user input text for model
@@ -40,31 +43,41 @@ def index():
     
     # extract data needed for visuals
     # TODO: Below is an example - modify to extract data for your own visuals
-    genre_counts = df.groupby('genre').count()['message']
+    genre_counts = df.groupby('genre').count()['message'].reset_index()
     genre_names = list(genre_counts.index)
     
     # create visuals
     # TODO: Below is an example - modify to create your own visuals
-    graphs = [
-        {
-            'data': [
-                Bar(
-                    x=genre_names,
-                    y=genre_counts
-                )
-            ],
+    
+    
+      
+    
+    
+    
+    fig = px.bar(genre_counts, x='genre', y='message') 
+    graphs = [px.bar(genre_counts, x='genre', y='message')]
+    
+    
+    # graphs = [
+    #     {
+    #         'data': [
+    #             Bar(
+    #                 x=genre_names,
+    #                 y=genre_counts
+    #             )
+    #         ],
 
-            'layout': {
-                'title': 'Distribution of Message Genres',
-                'yaxis': {
-                    'title': "Count"
-                },
-                'xaxis': {
-                    'title': "Genre"
-                }
-            }
-        }
-    ]
+    #         'layout': {
+    #             'title': 'Distribution of Message Genres',
+    #             'yaxis': {
+    #                 'title': "Count"
+    #             },
+    #             'xaxis': {
+    #                 'title': "Genre"
+    #             }
+    #         }
+    #     }
+    # ]
     
     # encode plotly graphs in JSON
     ids = ["graph-{}".format(i) for i, _ in enumerate(graphs)]
@@ -98,3 +111,11 @@ def main():
 
 if __name__ == '__main__':
     main()
+    
+    
+    
+# genre_counts = df.groupby('genre').count()['message'].reset_index()
+# genre_names = list(genre_counts.index)     
+# fig = px.bar(genre_counts, x='genre', y='message')     
+# fig.show(renderer="png")
+

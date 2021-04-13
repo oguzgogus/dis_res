@@ -5,8 +5,10 @@ from sqlalchemy import create_engine
 
 def load_data(messages_filepath, categories_filepath):
    
-    #input: file paths of csv files
-    #output: creates combined data frame of two csv files
+    """
+    input: file paths of csv files
+    output: creates combined data frame of two csv files
+    """
     
     #reading files
     messages = pd.read_csv(messages_filepath)
@@ -17,9 +19,11 @@ def load_data(messages_filepath, categories_filepath):
     return df
 
 def clean_data(df):
+    """
+    input: combined dataframe
+    output: cleaned dataframe
     
-    #input: combined dataframe
-    #output: cleaned dataframe
+    """
     
     #there are 36 different categories in a single string
     #they can be splitted by using ";" in between 
@@ -59,7 +63,9 @@ def clean_data(df):
 
 def save_data(df, database_filename):  
     
-    #input: previously created df and file name for the database
+    """
+    input: previously created df and file name for the database
+    """
     
     
     engine = create_engine('sqlite:///{}'.format(database_filename))
