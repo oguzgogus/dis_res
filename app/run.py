@@ -1,6 +1,7 @@
 import json
 import plotly
 import pandas as pd
+import os
 
 from nltk.stem import WordNetLemmatizer
 from nltk.tokenize import word_tokenize
@@ -27,30 +28,35 @@ def tokenize(text):
 
     return clean_tokens
 
+
+
 # load data
-engine = create_engine('sqlite:///C:\\Users\\ogzpython\\Desktop\\ml\\response_ml\\Disaster_Response_Project\\data\\dis_res.db')
+os.chdir("C:\\Users\\ogzpython\\Desktop\\ml\\response_ml\\Disaster_Response_Project")    
+#engine = create_engine('sqlite:///C:\\Users\\ogzpython\\Desktop\\ml\\response_ml\\Disaster_Response_Project\\data\\dis_res.db')
+
+engine = create_engine('sqlite:///data\\dis_res.db')
 df = pd.read_sql_table('dis_res', engine)
 
 # load model
 #model = joblib.load("../models/your_model_name.pkl")
-model = joblib.load(r"C:\Users\ogzpython\Desktop\ml\pkls\dis_res\model.pkl")
+model = joblib.load(r"model\model.pkl")
 
 def tokenize2(text):
  
  
-     """input:text
-     output: cleaned and tokenized list of the text"""
+      """input:text
+      output: cleaned and tokenized list of the text"""
  
      
-     text = text.lower()
-     text = re.sub(r"[^a-zA-Z0-9]", " ", text) 
-     text = word_tokenize(text) 
-     # eliminating stopwords 
-     text = [w for w in text if w not in stopwords.words("english")]
-     text = [WordNetLemmatizer().lemmatize(w) for w in text]
+      text = text.lower()
+      text = re.sub(r"[^a-zA-Z0-9]", " ", text) 
+      text = word_tokenize(text) 
+      # eliminating stopwords 
+      text = [w for w in text if w not in stopwords.words("english")]
+      text = [WordNetLemmatizer().lemmatize(w) for w in text]
      
      
-     return text
+      return text
  
 def explode_df(df):   
 
