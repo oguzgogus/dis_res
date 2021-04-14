@@ -31,7 +31,7 @@ def tokenize(text):
 
 
 # load data
-os.chdir("C:\\Users\\ogzpython\\Desktop\\ml\\response_ml\\Disaster_Response_Project")    
+ 
 #engine = create_engine('sqlite:///C:\\Users\\ogzpython\\Desktop\\ml\\response_ml\\Disaster_Response_Project\\data\\dis_res.db')
 
 engine = create_engine('sqlite:///data\\dis_res.db')
