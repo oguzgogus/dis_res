@@ -4,6 +4,7 @@
   2. Project Overview
   3. File Descriptions
   4. How to run
+  5. Visuals
 
 ## Installation
 
@@ -55,6 +56,11 @@ $ python model/train_classifier.py data/dis_res.db model/model.pkl
 $ python run.py
   4. To open web app go to http://0.0.0.0:3001/
 
+## Visuals
+
+![index](https://user-images.githubusercontent.com/55685290/114766770-7d0f0880-9d6f-11eb-87ab-c7daf2be33f7.PNG)
+
+![second](https://user-images.githubusercontent.com/55685290/114766779-8009f900-9d6f-11eb-9c91-a41476a1e92b.PNG)
 
 
 
