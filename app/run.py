@@ -11,8 +11,8 @@ from plotly.graph_objs import Bar
 import plotly.express as px
 from sklearn.externals import joblib
 from sqlalchemy import create_engine
-
-
+import re
+from nltk.corpus import stopwords
 
 app = Flask(__name__)
 
@@ -35,6 +35,43 @@ df = pd.read_sql_table('dis_res', engine)
 #model = joblib.load("../models/your_model_name.pkl")
 model = joblib.load(r"C:\Users\ogzpython\Desktop\ml\pkls\dis_res\model.pkl")
 
+def tokenize2(text):
+ 
+ 
+     """input:text
+     output: cleaned and tokenized list of the text"""
+ 
+     
+     text = text.lower()
+     text = re.sub(r"[^a-zA-Z0-9]", " ", text) 
+     text = word_tokenize(text) 
+     # eliminating stopwords 
+     text = [w for w in text if w not in stopwords.words("english")]
+     text = [WordNetLemmatizer().lemmatize(w) for w in text]
+     
+     
+     return text
+ 
+def explode_df(df):   
+
+    messages_token = df['message'].apply(tokenize2)
+    messages_token = pd.DataFrame(messages_token)
+    messages_token = messages_token.explode('message')
+    messages_token['message'] = messages_token['message'].astype(str)
+    messages_token = messages_token['message'].value_counts()[0:30]
+    messages_token = pd.DataFrame(messages_token).reset_index()
+    messages_token.columns = ['message','counts']
+    
+    return messages_token
+
+
+msg_val_cnts = explode_df(df)
+
+
+
+
+
+
 
 # index webpage displays cool visuals and receives user input text for model
 @app.route('/')
@@ -44,18 +81,21 @@ def index():
     # extract data needed for visuals
     # TODO: Below is an example - modify to extract data for your own visuals
     genre_counts = df.groupby('genre').count()['message'].reset_index()
-    genre_names = list(genre_counts.index)
     
     # create visuals
     # TODO: Below is an example - modify to create your own visuals
+
+
+ 
+         
     
     
-      
     
-    
-    
-    fig = px.bar(genre_counts, x='genre', y='message') 
-    graphs = [px.bar(genre_counts, x='genre', y='message')]
+    fig = px.bar(genre_counts, x='genre', y='message',title='2) Distribution of Message Genres',template="ggplot2") 
+    fig2 = px.scatter(msg_val_cnts,x='message',y = 'counts',size='counts',title='1) Most Frequent Words',template="ggplot2")
+
+    graphs = [fig,fig2
+         ]
     
     
     # graphs = [
